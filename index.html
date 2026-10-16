@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio Interactiva - Potenciación de Números Naturales | Colegio Montano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration and Script for LaTeX rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montano: {
+                            blue: '#1269A8',
+                            yellow: '#F7D615',
+                            sage: '#54887D',
+                            lightblue: '#88B5C7',
+                            olive: '#A6B046',
+                            softwhite: '#F2F5E9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d283c;
+            color: #333333;
+        }
+        .whiteboard-frame {
+            border: 12px solid #F7D615;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.1);
+        }
+        .tab-btn.active {
+            background-color: #1269A8;
+            color: #ffffff;
+            border-bottom: 4px solid #F7D615;
+            font-weight: bold;
+        }
+        .tab-btn {
+            background-color: #e2e8f0;
+            color: #54887D;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover:not(.active) {
+            background-color: #cbd5e1;
+            color: #1269A8;
+        }
+        .solution-container {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .solution-container.open {
+            max-height: 1200px;
+            opacity: 1;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F2F5E9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #54887D;
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 min-h-screen flex items-center justify-center">
+
+    <div id="whiteboard" class="whiteboard-frame w-full max-w-6xl bg-montano-softwhite overflow-hidden flex flex-col my-auto relative">
+        
+        <header class="bg-montano-blue text-white p-4 flex flex-wrap items-center justify-between gap-4 border-b-4 border-montano-yellow shadow-md">
+            <div class="flex items-center gap-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" 
+                     alt="Colegio Montano Logo" 
+                     class="h-12 w-auto bg-white p-1 rounded-md shadow"
+                     onerror="this.src='https://placehold.co/120x50/1269A8/FFFFFF?text=Colegio+Montano'">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-wide">Pizarra Digital Interactiva</h1>
+                    <p class="text-xs md:text-sm text-montano-lightblue font-medium">Matemáticas | 6.º Grado de Primaria</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="bg-montano-sage text-white text-xs px-3 py-1 rounded-full font-semibold hidden md:inline-block">
+                    Unidad 1: Operaciones y Propiedades Avanzadas
+                </span>
+                <button id="fullscreen-btn" onclick="toggleFullscreen()" class="bg-montano-yellow hover:bg-yellow-400 text-montano-blue font-bold px-3 py-2 rounded-lg text-sm flex items-center gap-2 shadow transition-transform transform active:scale-95">
+                    <i class="fa-solid font-bold fa-expand"></i>
+                    <span class="hidden sm:inline">Pantalla Completa</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="bg-montano-sage text-white px-6 py-3 border-b border-gray-300 flex justify-between items-center flex-wrap gap-2">
+            <h2 class="text-lg md:text-xl font-bold flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-montano-yellow"></i> Tema: Potenciación de Números Naturales y sus Propiedades
+            </h2>
+            <div class="text-xs bg-montano-softwhite text-montano-sage font-bold px-2 py-1 rounded border border-montano-lightblue">
+                Colegio Montano
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap bg-gray-200 border-b border-gray-300 px-2 pt-2 gap-1 text-xs md:text-sm font-semibold select-none">
+            <button onclick="switchTab('teoria')" id="tab-teoria" class="tab-btn active px-4 py-2.5 rounded-t-lg flex items-center gap-2">
+                <i class="fa-solid fa-book-open"></i> 1. Teoría
+            </button>
+            <button onclick="switchTab('ejemplos')" id="tab-ejemplos" class="tab-btn px-4 py-2.5 rounded-t-lg flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb"></i> 2. Ejemplos Resueltos
+            </button>
+            <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="tab-btn px-4 py-2.5 rounded-t-lg flex items-center gap-2">
+                <i class="fa-solid fa-pencil"></i> 3. Ejercicios Prácticos
+            </button>
+            <button onclick="switchTab('reflexion')" id="tab-reflexion" class="tab-btn px-4 py-2.5 rounded-t-lg flex items-center gap-2">
+                <i class="fa-solid fa-brain"></i> 4. Reflexión Crítica
+            </button>
+            <button onclick="switchTab('evaluacion')" id="tab-evaluacion" class="tab-btn px-4 py-2.5 rounded-t-lg flex items-center gap-2">
+                <i class="fa-solid fa-square-check"></i> 5. Evaluación Formativa
+            </button>
+        </nav>
+
+        <main class="p-4 md:p-6 overflow-y-auto custom-scrollbar flex-1 min-h-[500px] max-h-[calc(85vh-120px)] bg-montano-softwhite">
+
+            <!-- ================= TAB 1: TEORÍA ================= -->
+            <section id="sec-teoria" class="tab-content space-y-6">
+                <div class="bg-white p-5 rounded-xl border-l-8 border-montano-blue shadow-sm">
+                    <h3 class="text-xl font-bold text-montano-blue mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap"></i> ¿Qué es la Potenciación de Números Naturales?
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                        La <strong>potenciación</strong> es una forma abreviada de escribir una multiplicación de factores iguales. Nos permite representar de forma compacta un número que se multiplica por sí mismo varias veces en el conjunto de los números naturales ($\mathbb{N}$).
+                    </p>
+                    <div class="mt-3 p-3 bg-blue-50 border border-montano-lightblue rounded-lg text-center font-bold text-montano-blue text-base md:text-lg">
+                        $a^n = \underbrace{a \times a \times a \times \dots \times a}_{n \text{ veces}}$
+                    </div>
+                </div>
+
+                <!-- Elementos de la Potenciación -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-montano-lightblue shadow-sm text-center">
+                        <div class="text-montano-blue font-bold text-2xl mb-1">$a$</div>
+                        <h4 class="font-bold text-montano-sage text-sm mb-1">Base</h4>
+                        <p class="text-xs text-gray-600">Es el número natural que se repite como factor multiplicativo.</p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-montano-lightblue shadow-sm text-center">
+                        <div class="text-montano-blue font-bold text-2xl mb-1">$n$</div>
+                        <h4 class="font-bold text-montano-sage text-sm mb-1">Exponente</h4>
+                        <p class="text-xs text-gray-600">Indica la cantidad de veces que se debe multiplicar la base por sí misma.</p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-montano-lightblue shadow-sm text-center">
+                        <div class="text-montano-blue font-bold text-2xl mb-1">$P$</div>
+                        <h4 class="font-bold text-montano-sage text-sm mb-1">Potencia</h4>
+                        <p class="text-xs text-gray-600">Es el resultado final obtenido de realizar la multiplicación consecutiva.</p>
+                    </div>
+                </div>
+
+                <!-- Propiedades de la Potenciación -->
+                <div class="bg-white p-5 rounded-xl border-l-8 border-montano-yellow shadow-sm">
+                    <h4 class="text-xl font-bold text-montano-blue mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-montano-yellow"></i> Propiedades Fundamentales en $\mathbb{N}$
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs md:text-sm">
+                        <!-- Prop 1 -->
+                        <div class="p-3.5 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-bold text-montano-blue mb-1">1. Producto de Potencias de Igual Base</h5>
+                            <p class="text-gray-600 mb-2">Se conserva la base y se suman los exponentes.</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-montano-blue border">$a^m \times a^n = a^{m+n}$</div>
+                        </div>
+
+                        <!-- Prop 2 -->
+                        <div class="p-3.5 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-bold text-montano-blue mb-1">2. Cociente de Potencias de Igual Base</h5>
+                            <p class="text-gray-600 mb-2">Se conserva la base y se restan los exponentes ($a \neq 0, m \ge n$).</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-montano-blue border">$a^m \div a^n = a^{m-n}$</div>
+                        </div>
+
+                        <!-- Prop 3 -->
+                        <div class="p-3.5 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-bold text-montano-blue mb-1">3. Potencia de una Potencia</h5>
+                            <p class="text-gray-600 mb-2">Se conserva la base y se multiplican los exponentes entre sí.</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-montano-blue border">$(a^m)^n = a^{m \times n}$</div>
+                        </div>
+
+                        <!-- Prop 4 -->
+                        <div class="p-3.5 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <h5 class="font-bold text-emerald-800 mb-1">4. Potencia de un Producto</h5>
+                            <p class="text-gray-600 mb-2">El exponente se distribuye para cada uno de los factores.</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-emerald-800 border">$(a \times b)^n = a^n \times b^n$</div>
+                        </div>
+
+                        <!-- Prop 5 -->
+                        <div class="p-3.5 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <h5 class="font-bold text-emerald-800 mb-1">5. Potencia de un Cociente</h5>
+                            <p class="text-gray-600 mb-2">El exponente se distribuye para el dividendo y para el divisor ($b \neq 0$).</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-emerald-800 border">$(a \div b)^n = a^n \div b^n$</div>
+                        </div>
+
+                        <!-- Prop 6 -->
+                        <div class="p-3.5 bg-amber-50 rounded-lg border border-amber-200">
+                            <h5 class="font-bold text-amber-900 mb-1">6. Exponente Cero y Uno</h5>
+                            <p class="text-gray-600 mb-2">Todo número diferente de 0 elevado a 0 es 1; elevado a 1 da la misma base.</p>
+                            <div class="bg-white p-1.5 rounded text-center font-semibold text-amber-900 border">$a^0 = 1 \quad (a \neq 0) \qquad a^1 = a$</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casos Especiales y Advertencias Claras -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-montano-lightblue shadow-sm">
+                        <h4 class="font-bold text-montano-blue mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-star text-montano-yellow"></i> Potencias de Base 10
+                        </h4>
+                        <p class="text-xs md:text-sm text-gray-700">
+                            Para calcular cualquier potencia de base 10, basta con escribir el número $1$ seguido de tantos ceros como indique el exponente.
+                        </p>
+                        <ul class="mt-2 space-y-1 text-xs font-mono text-montano-sage">
+                            <li>$10^1 = 10$ (1 cero)</li>
+                            <li>$10^3 = 1,000$ (3 ceros)</li>
+                            <li>$10^6 = 1,000,000$ (6 ceros)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-red-200 shadow-sm">
+                        <h4 class="font-bold text-red-600 mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Error Frecuente a Evitar
+                        </h4>
+                        <p class="text-xs md:text-sm text-gray-700">
+                            <strong>¡Jamás multipliques la base por el exponente!</strong>
+                        </p>
+                        <div class="mt-2 p-2 bg-red-50 rounded text-xs text-red-800 font-semibold border border-red-200">
+                            ❌ $2^3 \neq 2 \times 3 = 6$ (Incorrecto)<br>
+                            ✔️ $2^3 = 2 \times 2 \times 2 = 8$ (Correcto)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 2: EJEMPLOS RESUELTOS ================= -->
+            <section id="sec-ejemplos" class="tab-content hidden space-y-6">
+                <div class="bg-white p-4 rounded-xl border border-montano-blue">
+                    <p class="text-sm text-gray-600">Revisa minuciosamente los siguientes <strong>15 ejemplos resueltos paso a paso</strong>, agrupados por nivel de dificultad.</p>
+                </div>
+
+                <!-- NIVEL BÁSICO -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-olive px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-seedling"></i> Nivel Básico (1 a 5)
+                    </h3>
+
+                    <!-- Ex 1 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 1: Cálculo Directo de una Potencia</div>
+                        <p class="text-sm text-gray-700 mt-1">Calcula el valor numérico de la potencia $3^4$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Identificamos la base ($3$) y el exponente ($4$).</p>
+                            <p><strong>Paso 2:</strong> Multiplicamos el $3$ por sí mismo $4$ veces: $3 \times 3 \times 3 \times 3$.</p>
+                            <p><strong>Paso 3:</strong> Operamos secuencialmente: $3 \times 3 = 9 \to 9 \times 3 = 27 \to 27 \times 3 = 81$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $3^4 = 81$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 2 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 2: Producto de Igual Base</div>
+                        <p class="text-sm text-gray-700 mt-1">Aplica propiedades para simplificar $2^3 \times 2^4$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Como la base es idéntica ($2$), aplicamos $a^m \times a^n = a^{m+n}$.</p>
+                            <p><strong>Paso 2:</strong> Sumamos los exponentes: $3 + 4 = 7$.</p>
+                            <p><strong>Paso 3:</strong> Expresamos la potencia final: $2^7$.</p>
+                            <p><strong>Paso 4:</strong> Calculamos: $2^7 = 128$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $2^3 \times 2^4 = 2^7 = 128$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 3 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 3: Cociente de Igual Base</div>
+                        <p class="text-sm text-gray-700 mt-1">Simplifica $5^6 \div 5^4$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Aplicamos la regla del cociente de igual base $a^m \div a^n = a^{m-n}$.</p>
+                            <p><strong>Paso 2:</strong> Restamos los exponentes: $6 - 4 = 2$.</p>
+                            <p><strong>Paso 3:</strong> Obtenemos $5^2 = 25$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $5^6 \div 5^4 = 5^2 = 25$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 4 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 4: Aplicación del Exponente Cero y Uno</div>
+                        <p class="text-sm text-gray-700 mt-1">Evalúa la expresión $8^0 + 12^1 + 1^9$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> $8^0 = 1$ (todo número distinto de 0 elevado a 0 vale 1).</p>
+                            <p><strong>Paso 2:</strong> $12^1 = 12$ (todo número elevado a 1 da la misma base).</p>
+                            <p><strong>Paso 3:</strong> $1^9 = 1$ (el 1 elevado a cualquier exponente sigue siendo 1).</p>
+                            <p><strong>Paso 4:</strong> Sumamos los valores: $1 + 12 + 1 = 14$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $14$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 5 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 5: Potencia de Base 10 Directa</div>
+                        <p class="text-sm text-gray-700 mt-1">Escribe en forma estándar el valor de $10^5$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Escribimos el dígito $1$.</p>
+                            <p><strong>Paso 2:</strong> Agregamos $5$ ceros a la derecha porque el exponente es $5$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $10^5 = 100,000$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL INTERMEDIO -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-sage px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-tree"></i> Nivel Intermedio (6 a 10)
+                    </h3>
+
+                    <!-- Ex 6 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 6: Potencia de una Potencia</div>
+                        <p class="text-sm text-gray-700 mt-1">Reduce a una sola potencia la expresión $(4^2)^3$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Aplicamos la propiedad $(a^m)^n = a^{m \times n}$.</p>
+                            <p><strong>Paso 2:</strong> Multiplicamos los exponentes: $2 \times 3 = 6$.</p>
+                            <p><strong>Paso 3:</strong> La potencia equivalente es $4^6$.</p>
+                            <p><strong>Paso 4:</strong> $4^6 = 4,096$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $(4^2)^3 = 4^6 = 4,096$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 7 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 7: Potencia de un Producto</div>
+                        <p class="text-sm text-gray-700 mt-1">Calcula $(2 \times 5)^3$ utilizando dos procedimientos distintos.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Método A (Paréntesis primero):</strong> $(2 \times 5)^3 = 10^3 = 1,000$.</p>
+                            <p><strong>Método B (Distribuyendo exponente):</strong> $2^3 \times 5^3 = 8 \times 125 = 1,000$.</p>
+                            <p class="text-montano-sage font-semibold">Conclusión: Ambos métodos llegan al mismo valor $1,000$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 8 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 8: Crecimiento Exponencial Contextual</div>
+                        <p class="text-sm text-gray-700 mt-1">Una bacteria en un laboratorio del Colegio Montano se duplica cada hora. Si inicialmente hay 1 bacteria, ¿cuántas bacterias habrá al cabo de 6 horas?</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Análisis:</strong> Multiplicar por 2 en cada hora durante 6 periodos se representa como $2^6$.</p>
+                            <p><strong>Cálculo:</strong> $2^6 = 2 \times 2 \times 2 \times 2 \times 2 \times 2 = 64$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: Habrá 64 bacterias en total.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 9 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 9: Simplificación Combinada de Potencias</div>
+                        <p class="text-sm text-gray-700 mt-1">Simplifica la expresión $\frac{6^8 \times 6^3}{6^9}$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1 (Numerador):</strong> Producto de bases iguales $\to 6^{8+3} = 6^{11}$.</p>
+                            <p><strong>Paso 2 (Cociente):</strong> División de bases iguales $\to \frac{6^{11}}{6^9} = 6^{11-9} = 6^2$.</p>
+                            <p><strong>Paso 3:</strong> $6^2 = 36$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $36$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 10 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 10: Descomposición en Potencias de 10</div>
+                        <p class="text-sm text-gray-700 mt-1">Expresa el número $745,000$ utilizando potencias de 10.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Separamos el número significativo: $745$.</p>
+                            <p><strong>Paso 2:</strong> Contamos los ceros al final: $3$ ceros $\to 10^3$.</p>
+                            <p><strong>Paso 3:</strong> Unimos los factores: $745 \times 10^3$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $745,000 = 745 \times 10^3$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL AVANZADO -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-blue px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-mountain"></i> Nivel Avanzado (11 a 15)
+                    </h3>
+
+                    <!-- Ex 11 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 11: Cambio de Base para Aplicar Propiedades</div>
+                        <p class="text-sm text-gray-700 mt-1">Simplifica $8^2 \times 2^4$ convirtiendo todo a base $2$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Expresamos la base $8$ como una potencia de $2$: $8 = 2^3$.</p>
+                            <p><strong>Paso 2:</strong> Sustituimos en la expresión: $(2^3)^2 \times 2^4$.</p>
+                            <p><strong>Paso 3:</strong> Aplicamos potencia de una potencia: $2^{3 \times 2} \times 2^4 = 2^6 \times 2^4$.</p>
+                            <p><strong>Paso 4:</strong> Sumamos exponentes: $2^{6+4} = 2^{10} = 1,024$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $1,024$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 12 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 12: Expresión con Múltiples Operaciones Combinadas</div>
+                        <p class="text-sm text-gray-700 mt-1">Halla el valor de $\frac{(3^3)^4 \times (3^2)^2}{3^{13}}$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1 (Simplificar exponentes):</strong> $(3^3)^4 = 3^{12}$ y $(3^2)^2 = 3^4$.</p>
+                            <p><strong>Paso 2 (Numerador):</strong> $3^{12} \times 3^4 = 3^{16}$.</p>
+                            <p><strong>Paso 3 (División):</strong> $\frac{3^{16}}{3^{13}} = 3^{16-13} = 3^3$.</p>
+                            <p><strong>Paso 4:</strong> $3^3 = 27$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $27$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 13 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 13: Problema Geométrico Volumétrico</div>
+                        <p class="text-sm text-gray-700 mt-1">Un depósito cúbico de agua tiene una arista que mide $5\text{ m}$. ¿Cuál es su volumen expresado como potencia y en metros cúbicos ($\text{m}^3$)?</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Fórmula del Volumen del Cubo:</strong> $V = l^3$ (lado al cubo).</p>
+                            <p><strong>Expresión como potencia:</strong> $V = 5^3\text{ m}^3$.</p>
+                            <p><strong>Cálculo:</strong> $5 \times 5 \times 5 = 125\text{ m}^3$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: El volumen del depósito es de $125\text{ m}^3$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 14 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 14: Ecuaciones sencillas con Exponentes</div>
+                        <p class="text-sm text-gray-700 mt-1">Encuentra el valor de $x$ en la ecuación: $7^x = 343$.</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Paso 1:</strong> Descomponemos $343$ en factores primos probando multiplicaciones sucesivas de $7$.</p>
+                            <p><strong>Paso 2:</strong> $7 \times 1 = 7 \to 7 \times 7 = 49 \to 49 \times 7 = 343$.</p>
+                            <p><strong>Paso 3:</strong> Por lo tanto, $343 = 7^3$.</p>
+                            <p><strong>Paso 4:</strong> Igualando bases $7^x = 7^3 \implies x = 3$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: $x = 3$.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 15 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-bold text-montano-blue">Ejemplo 15: Sistema de Redes Tecnológicas</div>
+                        <p class="text-sm text-gray-700 mt-1">En un torneo del Colegio Montano, un correo masivo se envía a 4 estudiantes. Cada uno lo reenvía a 4 compañeros, y cada uno de estos lo vuelve a reenviar a 4 más. Si este proceso se repite $5$ veces, ¿cuántos mensajes se enviaron en la quinta ronda?</p>
+                        <div class="mt-2 bg-slate-50 p-3 rounded text-xs md:text-sm text-gray-800 space-y-1">
+                            <p><strong>Ronda 1:</strong> $4^1 = 4$.</p>
+                            <p><strong>Ronda 2:</strong> $4^2 = 16$.</p>
+                            <p><strong>Ronda 5:</strong> $4^5$.</p>
+                            <p><strong>Cálculo:</strong> $4^5 = 4 \times 4 \times 4 \times 4 \times 4 = 1,024$.</p>
+                            <p class="text-montano-sage font-semibold">Respuesta: En la quinta ronda se enviaron 1,024 mensajes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 3: EJERCICIOS PRÁCTICOS ================= -->
+            <section id="sec-ejercicios" class="tab-content hidden space-y-6">
+                <div class="bg-white p-4 rounded-xl border border-montano-blue flex justify-between items-center flex-wrap gap-2">
+                    <p class="text-sm text-gray-600">Resuelve cada ejercicio en tu libreta y haz clic en <strong>"Mostrar solución"</strong> para revisar tus procesos.</p>
+                    <span class="text-xs font-bold text-montano-blue bg-blue-100 px-3 py-1 rounded-full">15 Ejercicios de Práctica</span>
+                </div>
+
+                <!-- NIVEL BÁSICO -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-olive px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-seedling"></i> Ejercicios Nivel Básico
+                    </h3>
+
+                    <!-- Ej 1 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 1</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Básico</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Calcula la potencia de $6^3$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e1')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e1">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e1" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                $6 \times 6 \times 6 = 216$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $216$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 2 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 2</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Básico</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Expresa como una sola potencia: $4^2 \times 4^5$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e2')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e2">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e2" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Conservamos la base y sumamos los exponentes: $2 + 5 = 7$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $4^7$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 3 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 3</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Básico</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Simplifica $9^8 \div 9^6$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e3')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e3">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e3" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Restamos exponentes: $8 - 6 = 2 \implies 9^2 = 81$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $81$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 4 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 4</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Básico</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Calcula la suma de $15^0 + 7^1 + 10^2$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e4')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e4">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e4" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                $15^0 = 1$, $7^1 = 7$, $10^2 = 100$.<br>
+                                $1 + 7 + 100 = 108$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $108$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 5 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 5</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Básico</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Un tablero cuadrado de ajedrez tiene 8 casillas por lado. ¿Cuántas casillas tiene en total escritas como potencia?</p>
+                        
+                        <button onclick="toggleSolution('sol-e5')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e5">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e5" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Área del cuadrado: $8 \times 8 = 8^2 = 64$ casillas.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $8^2 = 64$ casillas.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL INTERMEDIO -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-sage px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-tree"></i> Ejercicios Nivel Intermedio
+                    </h3>
+
+                    <!-- Ej 6 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 6</span>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded">Intermedio</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Aplica potencia de una potencia para resolver: $((2^3)^2)^2$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e6')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e6">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e6" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Multiplicamos todos los exponentes: $3 \times 2 \times 2 = 12$.<br>
+                                $2^{12} = 4,096$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $2^{12} = 4,096$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 7 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 7</span>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded">Intermedio</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Simplifica a su mínima expresión: $\frac{5^4 \times 5^7}{5^9}$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e7')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e7">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e7" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Numerador: $5^{4+7} = 5^{11}$.<br>
+                                División: $5^{11-9} = 5^2 = 25$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $25$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 8 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 8</span>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded">Intermedio</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Un edificio de estacionamiento tiene $3$ pisos, en cada piso hay $3$ pasillos y en cada pasillo caben $3$ vehículos. ¿Cuántos vehículos se pueden estacionar?</p>
+                        
+                        <button onclick="toggleSolution('sol-e8')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e8">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e8" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Expresión como potencia: $3^3 = 3 \times 3 \times 3 = 27$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $27$ vehículos.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 9 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 9</span>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded">Intermedio</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Escribe el número $12,000,000$ usando el producto de un número natural por una potencia de 10.</p>
+                        
+                        <button onclick="toggleSolution('sol-e9')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e9">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e9" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Contamos $6$ ceros a la derecha: $12 \times 10^6$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $12 \times 10^6$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 10 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 10</span>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded">Intermedio</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Calcula la potencia distributiva $(3 \times 4)^3$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e10')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e10">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e10" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                $(3 \times 4)^3 = 12^3 = 1,728$ o $3^3 \times 4^3 = 27 \times 64 = 1,728$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $1,728$.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL AVANZADO -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-white bg-montano-blue px-4 py-1.5 rounded-lg inline-block shadow">
+                        <i class="fa-solid fa-mountain"></i> Ejercicios Nivel Avanzado
+                    </h3>
+
+                    <!-- Ej 11 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 11</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Avanzado</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Expresa $27^2 \times 3^4$ en base $3$ y calcula su valor final.</p>
+                        
+                        <button onclick="toggleSolution('sol-e11')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e11">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e11" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Transformamos $27 \to 3^3$.<br>
+                                $(3^3)^2 \times 3^4 = 3^6 \times 3^4 = 3^{10} = 59,049$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $3^{10} = 59,049$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 12 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 12</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Avanzado</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Halla el valor exacto de la variable $n$ en la igualdad $5^{2n+1} = 5^9$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e12')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e12">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e12" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Al ser iguales las bases ($5$), igualamos exponentes:<br>
+                                $2n + 1 = 9 \implies 2n = 8 \implies n = 4$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $n = 4$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 13 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 13</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Avanzado</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Simplifica $\frac{(10^3)^3 \div 10^4}{10^2}$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e13')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e13">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e13" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Numerador: $10^9 \div 10^4 = 10^5$.<br>
+                                Cociente: $\frac{10^5}{10^2} = 10^{5-2} = 10^3 = 1,000$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $1,000$.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 14 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 14</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Avanzado</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">En una caja cúbica entran $64$ cubitos de madera iguales. ¿Cuántos cubitos hay en cada arista o lado de la caja?</p>
+                        
+                        <button onclick="toggleSolution('sol-e14')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e14">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e14" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Buscamos un número $l$ tal que $l^3 = 64$.<br>
+                                Probamos: $4 \times 4 \times 4 = 64$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $4$ cubitos por lado.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ej 15 -->
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="font-bold text-montano-blue">Ejercicio 15</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Avanzado</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mt-2">Determina el valor final expresado en forma estándar de la operación: $\frac{2^5 \times 3^4 \times 2^3}{2^7 \times 3^2}$.</p>
+                        
+                        <button onclick="toggleSolution('sol-e15')" class="mt-3 text-xs bg-montano-blue text-white font-semibold px-3 py-1.5 rounded hover:bg-blue-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-eye"></i> <span id="lbl-sol-e15">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-e15" class="solution-container">
+                            <div class="bg-montano-lightblue/20 p-3 rounded-lg border border-montano-lightblue text-xs md:text-sm text-gray-800">
+                                <strong>Solución:</strong><br>
+                                Agrupamos bases iguales:<br>
+                                Base 2: $\frac{2^{5+3}}{2^7} = \frac{2^8}{2^7} = 2^{8-7} = 2^1 = 2$.<br>
+                                Base 3: $\frac{3^4}{3^2} = 3^{4-2} = 3^2 = 9$.<br>
+                                Producto final: $2 \times 9 = 18$.<br>
+                                <span class="text-montano-blue font-bold">Respuesta: $18$.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 4: REFLEXIÓN CRÍTICA ================= -->
+            <section id="sec-reflexion" class="tab-content hidden space-y-6">
+                <div class="bg-white p-5 rounded-xl border-l-8 border-montano-blue shadow-sm">
+                    <h3 class="text-xl font-bold text-montano-blue mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-brain text-montano-yellow"></i> Pensamiento Lógico y Metacognición
+                    </h3>
+                    <p class="text-gray-700 text-sm">
+                        Analiza los siguientes dilemas matemáticos sobre el comportamiento de los exponentes para profundizar en tu sentido numérico.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Q1 -->
+                    <div class="bg-white p-5 rounded-xl border border-montano-lightblue shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-montano-sage font-bold text-base mb-2">
+                                <span class="bg-montano-sage text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">1</span>
+                                ¿Por qué $a^0 = 1$ para todo $a \neq 0$?
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Usando la propiedad del cociente de bases iguales $\frac{a^n}{a^n} = a^{n-n} = a^0$, demuestra intuitivamente por qué el resultado siempre debe dar 1 si dividimos cualquier número entre sí mismo.
+                            </p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg text-xs text-amber-900 border border-yellow-200">
+                            <strong>Análisis:</strong> Como cualquier número (salvo el 0) dividido entre sí mismo es igual a $1$, y algebraicamente la resta de exponentes nos da $a^0$, se deduce obligatoriamente que $a^0 = 1$.
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="bg-white p-5 rounded-xl border border-montano-lightblue shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-montano-sage font-bold text-base mb-2">
+                                <span class="bg-montano-sage text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">2</span>
+                                Crecimiento Lineal vs. Crecimiento Exponencial
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Si te ofrecen elegir entre ganar Q10,000 diarios por un mes o ganar Q1 el primer día y duplicar tu ganancia cada día ($2^0, 2^1, 2^2, \dots$), ¿cuál opción te volverá inmensamente rico y por qué?
+                            </p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg text-xs text-blue-900 border border-blue-200">
+                            <strong>Análisis:</strong> La duplicación exponencial ($2^{30}$) crece tan rápido que supera con creces cualquier suma fija lineal en pocos días.
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="bg-white p-5 rounded-xl border border-montano-lightblue shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-montano-sage font-bold text-base mb-2">
+                                <span class="bg-montano-sage text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">3</span>
+                                ¿Es la suma distributiva con respecto a la potencia?
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                ¿Es verdadero afirmar que $(3 + 4)^2 = 3^2 + 4^2$? Calcula ambos lados y explica tu respuesta.
+                            </p>
+                        </div>
+                        <div class="mt-4 p-3 bg-emerald-50 rounded-lg text-xs text-emerald-900 border border-emerald-200">
+                            <strong>Análisis:</strong> Lado izquierdo: $7^2 = 49$. Lado derecho: $9 + 16 = 25$. Como $49 \neq 25$, la potencia **NO es distributiva respecto a la suma**.
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="bg-white p-5 rounded-xl border border-montano-lightblue shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-montano-sage font-bold text-base mb-2">
+                                <span class="bg-montano-sage text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">4</span>
+                                Aplicación Informática de la Base 2
+                            </div>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                ¿Por qué la memoria de los teléfonos y computadoras viene en capacidades como 16 GB, 32 GB, 64 GB, 128 GB, 256 GB, 512 GB?
+                            </p>
+                        </div>
+                        <div class="mt-4 p-3 bg-purple-50 rounded-lg text-xs text-purple-900 border border-purple-200">
+                            <strong>Análisis:</strong> Los sistemas digitales operan en código binario (base 2), por lo que las capacidades son potencias puras de 2 ($2^4, 2^5, 2^6, 2^7, \dots$).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 5: EVALUACIÓN FORMATIVA ================= -->
+            <section id="sec-evaluacion" class="tab-content hidden space-y-6">
+                <div class="bg-white p-5 rounded-xl border-l-8 border-montano-yellow shadow-sm">
+                    <h3 class="text-xl font-bold text-montano-blue mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-check text-montano-yellow"></i> Evaluación Formativa Integradora
+                    </h3>
+                    <p class="text-gray-700 text-sm">
+                        Resuelve este examen corto interactivo para verificar tu dominio de la potenciación.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Pregunta 1 -->
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <span class="text-xs font-bold text-montano-sage uppercase tracking-wider">Pregunta 1 - Selección Teórica</span>
+                        <h4 class="font-bold text-gray-800 text-base mt-1">¿Cuál es el resultado simplificado de $\frac{2^5 \times (2^2)^3}{2^9}$?</h4>
+                        <ol class="list-alpha list-inside text-sm text-gray-700 mt-2 space-y-1">
+                            <li>a) $2^2 = 4$</li>
+                            <li>b) $2^1 = 2$</li>
+                            <li>c) $2^3 = 8$</li>
+                            <li>d) $2^0 = 1$</li>
+                        </ol>
+
+                        <button onclick="toggleSolution('sol-ev1')" class="mt-4 text-xs bg-montano-blue text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-800 transition flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical"></i> <span id="lbl-sol-ev1">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-ev1" class="solution-container">
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200 text-xs md:text-sm text-gray-800">
+                                <strong class="text-emerald-800">Respuesta Correcta: a) $2^2 = 4$.</strong><br>
+                                <em>Procedimiento:</em><br>
+                                $(2^2)^3 = 2^6$.<br>
+                                Numerador: $2^5 \times 2^6 = 2^{11}$.<br>
+                                Cociente: $\frac{2^{11}}{2^9} = 2^{11-9} = 2^2 = 4$.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <span class="text-xs font-bold text-montano-sage uppercase tracking-wider">Pregunta 2 - Problema Geométrico Escolar</span>
+                        <h4 class="font-bold text-gray-800 text-base mt-1">
+                            En el Colegio Montano se desea construir una maqueta cúbica para la feria de ciencias. Si el volumen total de la maqueta es de $343\text{ cm}^3$, ¿cuánto mide la arista (lado) del cubo?
+                        </h4>
+
+                        <button onclick="toggleSolution('sol-ev2')" class="mt-4 text-xs bg-montano-blue text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-800 transition flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical"></i> <span id="lbl-sol-ev2">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-ev2" class="solution-container">
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200 text-xs md:text-sm text-gray-800">
+                                <strong class="text-emerald-800">Respuesta: La arista mide $7\text{ cm}$.</strong><br>
+                                <em>Procedimiento:</em><br>
+                                Buscamos la base $l$ que cumpla $l^3 = 343$.<br>
+                                $7 \times 7 \times 7 = 343 \implies l = 7\text{ cm}$.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <span class="text-xs font-bold text-montano-sage uppercase tracking-wider">Pregunta 3 - Notación Científica y Potencias de 10</span>
+                        <h4 class="font-bold text-gray-800 text-base mt-1">
+                            La distancia de la Tierra al Sol es de aproximadamente $150,000,000\text{ km}$. Expresa esta cantidad usando el producto de un número natural por una potencia de 10.
+                        </h4>
+
+                        <button onclick="toggleSolution('sol-ev3')" class="mt-4 text-xs bg-montano-blue text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-800 transition flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical"></i> <span id="lbl-sol-ev3">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-ev3" class="solution-container">
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200 text-xs md:text-sm text-gray-800">
+                                <strong class="text-emerald-800">Respuesta: $15 \times 10^7\text{ km}$ (o $150 \times 10^6\text{ km}$).</strong><br>
+                                <em>Procedimiento:</em><br>
+                                Contamos $7$ ceros seguidos después del $15$: $15 \times 10^7$.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <span class="text-xs font-bold text-montano-sage uppercase tracking-wider">Pregunta 4 - Demostración de Propiedades</span>
+                        <h4 class="font-bold text-gray-800 text-base mt-1">
+                            Calcula y compara las dos expresiones: A = $(2 \times 3)^3$ y B = $2^3 \times 3^3$. ¿Qué propiedad se cumple?
+                        </h4>
+
+                        <button onclick="toggleSolution('sol-ev4')" class="mt-4 text-xs bg-montano-blue text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-800 transition flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical"></i> <span id="lbl-sol-ev4">Mostrar solución</span>
+                        </button>
+
+                        <div id="sol-ev4" class="solution-container">
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200 text-xs md:text-sm text-gray-800">
+                                <strong class="text-emerald-800">Respuesta: Ambas valen $216$. Se demuestra la Propiedad Distributiva de la Potencia respecto a la Multiplicación.</strong><br>
+                                <em>Procedimiento:</em><br>
+                                A: $(6)^3 = 216$.<br>
+                                B: $8 \times 27 = 216$.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-montano-blue text-white p-3 text-center text-xs border-t-2 border-montano-yellow flex flex-wrap justify-between items-center px-6 gap-2">
+            <div>
+                <strong>Colegio Montano</strong> &copy; 2026 - Material Educativo Interactivo
+            </div>
+            <div class="text-montano-lightblue">
+                Diseñado para Canvas Education
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        /* Function to switch active tabs */
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            const targetContent = document.getElementById('sec-' + tabId);
+            const targetBtn = document.getElementById('tab-' + tabId);
+
+            if (targetContent && targetBtn) {
+                targetContent.classList.remove('hidden');
+                targetBtn.classList.add('active');
+            }
+
+            // Re-render MathJax formulas when switching tabs
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        /* Function to toggle solution visibility with MathJax refresh */
+        function toggleSolution(solId) {
+            const container = document.getElementById(solId);
+            const label = document.getElementById('lbl-' + solId);
+
+            if (container) {
+                container.classList.toggle('open');
+                if (label) {
+                    if (container.classList.contains('open')) {
+                        label.textContent = 'Ocultar solución';
+                    } else {
+                        label.textContent = 'Mostrar solución';
+                    }
+                }
+                
+                // Re-render MathJax inside newly opened solution container
+                if (window.MathJax && container.classList.contains('open')) {
+                    window.MathJax.typesetPromise([container]).catch(function (err) {
+                        console.log('MathJax typeset error: ' + err.message);
+                    });
+                }
+            }
+        }
+
+        /* Fullscreen API Toggle Function */
+        function toggleFullscreen() {
+            const elem = document.getElementById('whiteboard');
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
